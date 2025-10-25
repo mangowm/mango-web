@@ -1,69 +1,64 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import type React from "react";
 import "../index.css";
 import Providers from "@/components/providers";
+
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "SoftwareApplication",
 	name: "MangoWC",
+	alternateName: "Mango Window Compositor",
 	description:
-		"A minimal Wayland compositor inspired by dwl, featuring smooth scrolling, scratchpads, workspace overview, and rich window states.",
-	applicationCategory: "DeveloperApplication",
+		"MangoWC is a lightweight, high-performance Wayland compositor built on dwl, designed for speed, flexibility, and a modern, customizable desktop experience.",
+	applicationCategory: "DesktopEnhancementApplication",
 	operatingSystem: "Linux",
+	programmingLanguage: "C",
+	softwareVersion: "latest",
+	url: "https://mangowc.vercel.app",
+	codeRepository: "https://github.com/DreamMaoMao/mangowc",
+	downloadUrl: "https://github.com/DreamMaoMao/mangowc/releases",
+	license: "https://github.com/DreamMaoMao/mangowc/blob/main/LICENSE",
 	author: {
 		"@type": "Person",
 		name: "DreamMaoMao",
 		url: "https://github.com/DreamMaoMao",
 	},
-	codeRepository: "https://github.com/DreamMaoMao/mangowc",
-	downloadUrl: "https://github.com/DreamMaoMao/mangowc/releases",
-	softwareVersion: "latest",
-	license: "https://github.com/DreamMaoMao/mangowc/blob/main/LICENSE",
-	keywords: "wayland, compositor, window manager, dwl, lightweight, linux",
-	aggregateRating: {
-		"@type": "AggregateRating",
-		ratingValue: "4.5", // Placeholder, based on GitHub stars
-		ratingCount: "944", // From GitHub
-	},
+	sameAs: [
+		"https://github.com/DreamMaoMao/mangowc",
+		"https://mangowc.vercel.app",
+	],
+	keywords: [
+		"wayland compositor",
+		"dwl",
+		"linux window manager",
+		"lightweight wm",
+		"tiling compositor",
+	],
 };
-
-const geist = Geist({ subsets: ["latin"] });
-const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://mangowc.vercel.app"),
-	title: "MangoWC - Lightweight Wayland Compositor",
+	title: {
+		default: "MangoWC - Lightweight Wayland Compositor",
+		template: "%s | MangoWC",
+	},
 	description:
-		"A minimal Wayland compositor inspired by dwl, featuring smooth scrolling, scratchpads, workspace overview, and rich window states for a productive desktop experience.",
+		"MangoWC is a lightweight, high-performance Wayland compositor built on dwl, offering speed, flexibility, and a modern, customizable desktop experience.",
 	keywords: [
 		"wayland compositor",
 		"window manager",
 		"dwl",
-		"lightweight",
 		"linux",
-		"tiling wm",
-		"wayland",
-		"scroller layout",
-		"master stack",
-		"animations",
-		"xwayland",
+		"lightweight wm",
 	],
-	icons: {
-		icon: "/favicon.ico",
-		apple: "/logo-192x192.png",
-		other: [
-			{ rel: "icon", url: "/logo-16x16.png" },
-			{ rel: "icon", url: "/logo-32x32.png" },
-			{ rel: "icon", url: "/logo-512x512.png" },
-		],
-	},
 	openGraph: {
 		title: "MangoWC - Lightweight Wayland Compositor",
 		description:
-			"A minimal Wayland compositor inspired by dwl, featuring smooth scrolling, scratchpads, workspace overview, and rich window states.",
+			"Fast, flexible, and minimal — MangoWC is a modern Wayland compositor built on dwl for Linux power users.",
 		url: "https://mangowc.vercel.app",
 		siteName: "MangoWC",
 		images: [
@@ -71,7 +66,7 @@ export const metadata: Metadata = {
 				url: "/logo-1200x630.png",
 				width: 1200,
 				height: 630,
-				alt: "MangoWC Logo",
+				alt: "MangoWC Wayland Compositor",
 			},
 		],
 		locale: "en_US",
@@ -81,8 +76,13 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "MangoWC - Lightweight Wayland Compositor",
 		description:
-			"A minimal Wayland compositor inspired by dwl, featuring smooth scrolling, scratchpads, workspace overview, and rich window states.",
+			"MangoWC is a fast, customizable Wayland compositor for Linux — smooth animations, flexible layouts, and advanced window control.",
 		images: ["/logo-1200x630.png"],
+		creator: "@DreamMaoMao",
+	},
+	icons: {
+		icon: "/favicon.ico",
+		apple: "/logo-192x192.png",
 	},
 	robots: {
 		index: true,
@@ -90,24 +90,28 @@ export const metadata: Metadata = {
 		googleBot: {
 			index: true,
 			follow: true,
-			"max-video-preview": -1,
 			"max-image-preview": "large",
 			"max-snippet": -1,
+			"max-video-preview": -1,
 		},
 	},
-	alternates: {
-		canonical: "https://mangowc.vercel.app",
-	},
+	alternates: { canonical: "https://mangowc.vercel.app" },
+	category: "Software",
 };
 
+/**
+ * ✅ Clean, accessible layout with Analytics + Providers
+ * - SEO friendly
+ * - JSON-LD injection
+ */
 export default function RootLayout({
 	children,
-}: Readonly<{
+}: {
 	children: React.ReactNode;
-}>) {
+}) {
 	return (
-		<html lang="en" suppressHydrationWarning={true}>
-			<body className={"font-sans antialiased"}>
+		<html lang="en" suppressHydrationWarning>
+			<body className="font-sans antialiased">
 				<a
 					href="#main"
 					className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded z-50"

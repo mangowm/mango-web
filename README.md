@@ -1,6 +1,6 @@
 # MangoWC Web
 
-A web application for MangoWC, a lightweight and fast Wayland window manager.
+A web application for MangoWC, a lightweight, high-performance Wayland compositor built on dwl.
 
 ## Tech Stack
 
@@ -34,4 +34,4 @@ A web application for MangoWC, a lightweight and fast Wayland window manager.
 
 ## About MangoWC
 
-MangoWC is a minimal, fast Wayland window manager with smooth animations, flexible layouts, and powerful features. Built on dwl for simplicity and performance.
+MangoWC is a lightweight, high-performance Wayland compositor built on dwl, designed for speed, flexibility, and a modern, customizable desktop experience.

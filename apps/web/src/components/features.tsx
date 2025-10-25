@@ -6,21 +6,20 @@ const features = [
 	{
 		title: "Master Stack Layout",
 		description:
-			"Powerful tiling layout with master and stack areas for efficient window management",
+			"Flexible window layouts with easy switching (scroller, master-stack, monocle, center-master, etc.)",
 		video:
 			"https://opeheybxdg2xe4zd.public.blob.vercel-storage.com/master-stack-layout.mp4",
 	},
 	{
 		title: "Scroller Layout",
-		description:
-			"Smooth scrolling layout for managing multiple windows with ease",
+		description: "Smooth scrolling layout for managing multiple windows",
 		video:
 			"https://opeheybxdg2xe4zd.public.blob.vercel-storage.com/scroller-layout.mp4",
 	},
 	{
 		title: "Layer Animation",
 		description:
-			"Elegant animations for window open/close, tag transitions, and layer effects",
+			"Smooth and customizable animations (window open/move/close, tag enter/leave, layer open/close/move)",
 		video:
 			"https://opeheybxdg2xe4zd.public.blob.vercel-storage.com/layer-animation.mp4",
 	},
@@ -58,8 +57,8 @@ export function Features() {
 						Powerful Features
 					</h2>
 					<p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground">
-						Advanced window management with smooth animations, flexible layouts,
-						and rich window states
+						In addition to basic WM functionality, MangoWC provides excellent
+						xwayland support, base tags, smooth animations, rich window states
 					</p>
 				</div>
 

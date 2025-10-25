@@ -23,7 +23,9 @@ export function Hero() {
 				</h1>
 
 				<p className="mx-auto mb-12 max-w-2xl text-balance text-lg text-muted-foreground sm:text-xl">
-					MangoWC is a minimal Wayland compositor inspired by dwl. It adds modern features like smooth scrolling, scratchpads, and workspace overview, while keeping a lightweight and fast workflow.
+					MangoWC is a lightweight, high-performance Wayland compositor built on
+					dwl, designed for speed, flexibility, and a modern, customizable
+					desktop experience.
 				</p>
 
 				<div className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row">

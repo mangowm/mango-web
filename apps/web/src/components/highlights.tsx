@@ -3,32 +3,31 @@ export function Highlights() {
 		{
 			title: "Lightweight & Fast",
 			description:
-				"Builds in seconds with minimal dependencies, no compromise on functionality",
+				"MangoWC is as lightweight as dwl, and can be built completely within a few seconds. Despite this, MangoWC does not compromise on functionality.",
 		},
 		{
 			title: "Multiple Layouts",
 			description:
-				"Tile, scroller, monocle, grid, deck, center-tile, and more layout options",
+				"Flexible window layouts with easy switching (scroller, master-stack, monocle, center-master, etc.)",
 		},
 		{
 			title: "Smooth Animations",
 			description:
-				"Customizable animations for windows, tags, and layers with scenefx effects",
+				"Smooth and customizable complete animations (window open/move/close, tag enter/leave, layer open/close/move)",
 		},
 		{
 			title: "Excellent XWayland",
-			description:
-				"Full support for X11 applications on Wayland with seamless integration",
+			description: "Excellent xwayland support.",
 		},
 		{
 			title: "Rich Window States",
 			description:
-				"Swallow, minimize, maximize, fakefullscreen, overlay, and more states",
+				"Rich window states (swallow, minimize, maximize, unglobal, global, fakefullscreen, overlay, etc.)",
 		},
 		{
 			title: "IPC Support",
 			description:
-				"Send and receive messages from external programs for powerful automation",
+				"Ipc support (get/send message from/to compositor by external program)",
 		},
 	];
 
@@ -40,8 +39,8 @@ export function Highlights() {
 						Why MangoWC
 					</h2>
 					<p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground">
-						A modern Wayland window manager with everything you need for a
-						productive desktop
+						In addition to basic WM functionality, MangoWC provides excellent
+						features
 					</p>
 				</div>
 
