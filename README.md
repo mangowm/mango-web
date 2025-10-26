@@ -1,37 +1,64 @@
 # MangoWC Web
 
-A web application for MangoWC, a lightweight, high-performance Wayland compositor built on dwl.
+This website is for **MangoWC**, a lightweight, high-performance Wayland compositor built on dwl. This site provides comprehensive guides, configuration examples, and resources for users and developers.
 
-## Tech Stack
+## Prerequisites
 
-- **Framework**: Next.js 16
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI
-- **Package Manager**: Bun
-- **Monorepo**: Turbo
+Before you begin, ensure you have the following installed:
 
-## Getting Started
+- [Bun](https://bun.sh/docs/installation) (recommended) or [Node.js](https://nodejs.org/)
 
-1. Install dependencies:
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:atheeq-rhxn/mangowc-web.git
+   cd mangowc-web
+   ```
+
+2. **Install dependencies:**
    ```bash
    bun install
    ```
 
-2. Start development server:
+3. **Set up environment variables (optional):**
+   Create a `.env` file in the `apps/web` directory and configure any required variables based on `.env.example`.
+
+## Development
+
+1. **Start the development server:**
    ```bash
    bun run dev
    ```
 
-3. Open [http://localhost:3001](http://localhost:3001) in your browser.
+2. **Open your browser:**
+   Navigate to [http://localhost:3001](http://localhost:3001) to view the site.
 
-## Scripts
+### Available Scripts
 
-- `bun run dev` - Start development server
-- `bun run build` - Build for production
-- `bun run check` - Run linting and formatting
+- `bun run dev` - Start the development server
+- `bun run build` - Build the application for production
+- `bun run check` - Run linting and formatting with Biome
 - `bun run check-types` - Run TypeScript type checking
 
-## About MangoWC
+## Project Structure
 
-MangoWC is a lightweight, high-performance Wayland compositor built on dwl, designed for speed, flexibility, and a modern, customizable desktop experience.
+```
+mangowc-web/
+├── apps/
+│   └── web/                 # Main Next.js application
+│       ├── content/docs/    # Documentation content (MDX)
+│       ├── src/
+│       │   ├── app/         # Next.js app router pages
+│       │   ├── components/  # Reusable UI components
+│       │   └── lib/         # Utility functions and configurations
+│       └── public/          # Static assets
+├── packages/                # Shared packages (if any)
+└── turbo.json               # Monorepo configuration
+```
+
+## Links
+
+- 🌐 **Live Site**: [https://mangowc.vercel.app](https://mangowc.vercel.app)
+- 📖 **MangoWC Repository**: [https://github.com/DreamMaoMao/mangowc](https://github.com/DreamMaoMao/mangowc)
+- 📚 **Documentation**: [https://mangowc.vercel.app/docs](https://mangowc.vercel.app/docs)
