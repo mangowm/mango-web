@@ -36,7 +36,6 @@ export function RightTileLayout() {
 			const gap = 16;
 
 			// Horizontal Calculations (Master Right, Stack Left)
-			// This layout is strictly horizontal as requested.
 			const h_halfW = (width - gap) / 2;
 			const h_halfH = (height - gap) / 2;
 			const h_rightX = h_halfW + gap;
@@ -93,11 +92,10 @@ export function RightTileLayout() {
 
 			// --- Calculate Rects based on Horizontal Orientation ---
 			
-			// Define standard positions (Normal State)
-			// Pos 0: Master (Right)
-			// Pos 1: Stack 1 (Top Left)
-			// Pos 2: Stack 2 (Bottom Left)
-			let pos0, pos1, pos2;
+			// Initialize with safe defaults to prevent TypeScript errors
+			let pos0 = { x: 0, y: 0, w: 0, h: 0 };
+			let pos1 = { x: 0, y: 0, w: 0, h: 0 };
+			let pos2 = { x: 0, y: 0, w: 0, h: 0 };
 
 			// Horizontal Only Logic: Master Right, Stack Left
 			if (activeWindows === 1) {
@@ -124,7 +122,8 @@ export function RightTileLayout() {
 			if (isSwap && activeWindows === 3) target1 = pos2;
 			
 			set(
-				r1.current, target1?.x ?? 0, target1?.y ?? 0, target1?.w ?? 0, target1?.h ?? 0,
+				r1.current, 
+				target1.x, target1.y, target1.w, target1.h,
 				phase > 0 && phase < 8,
 				focusedWindow === 1
 			);
@@ -135,7 +134,8 @@ export function RightTileLayout() {
 			let target2 = pos1;
 			
 			set(
-				r2.current, target2?.x ?? 0, target2?.y ?? 0, target2?.w ?? 0, target2?.h ?? 0,
+				r2.current, 
+				target2.x, target2.y, target2.w, target2.h,
 				phase >= 2 && phase < 7,
 				focusedWindow === 2
 			);
@@ -153,7 +153,8 @@ export function RightTileLayout() {
 			}
 
 			set(
-				r3.current, target3?.x ?? 0, target3?.y ?? 0, target3?.w ?? 0, target3?.h ?? 0,
+				r3.current, 
+				target3.x, target3.y, target3.w, target3.h,
 				phase >= 3 && phase < 6,
 				focusedWindow === 3
 			);
@@ -163,7 +164,7 @@ export function RightTileLayout() {
 		const ro = new ResizeObserver(update);
 		ro.observe(containerRef.current as Element);
 		return () => ro.disconnect();
-	}, [phase]); // Removed orientation dependency
+	}, [phase]); 
 
 	// Loop Timing
 	useEffect(() => {

@@ -207,9 +207,7 @@ export function MangowcLayouts() {
 				{activeLayout === "center-tile" && (
 					<CenterTileLayout orientation={orientation} />
 				)}
-				{activeLayout === "right-tile" && (
-					<RightTileLayout orientation={orientation} />
-				)}
+				{activeLayout === "right-tile" && <RightTileLayout />}
 				{activeLayout === "monocle" && <MonocleLayout />}
 			</div>
 		</div>
