@@ -100,10 +100,16 @@ export function RightTileLayout() {
 			// Horizontal Only Logic: Master Right, Stack Left
 			if (activeWindows === 1) {
 				pos0 = { x: 0, y: 0, w: width, h: height };
+				// FIX: Pre-calculate stack positions so they fade out in place
+				// instead of shrinking to 0,0
+				pos1 = { x: 0, y: 0, w: h_halfW, h: height };
+				pos2 = { x: 0, y: h_bottomY, w: h_halfW, h: h_halfH };
 			} else if (activeWindows === 2) {
 				// Master Right, Stack Left
 				pos0 = { x: h_rightX, y: 0, w: h_halfW, h: height };
 				pos1 = { x: 0, y: 0, w: h_halfW, h: height };
+				// Pre-calc pos2 for smooth entry of window 3
+				pos2 = { x: 0, y: h_bottomY, w: h_halfW, h: h_halfH };
 			} else {
 				// Master Right
 				pos0 = { x: h_rightX, y: 0, w: h_halfW, h: height };
