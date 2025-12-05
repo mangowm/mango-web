@@ -1,10 +1,4 @@
 {
-	"pages": [
-		"index",
-		"core-settings",
-		"window-management",
-		"input-devices",
-		"appearance",
-		"advanced"
-	]
+	"title": "Configuration",
+	"pages": ["basics", "input", "monitors"]
 }

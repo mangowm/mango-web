@@ -1,58 +1,71 @@
 ---
-title: Documentation
-description: Complete MangoWC documentation and guides
+title: Introduction
+description: A lightweight, Wayland compositor based on dwl.
 ---
 
-import { Cards, Card } from 'fumadocs-ui/components/card';
 import { Callout } from 'fumadocs-ui/components/callout';
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Layers, Zap, LayoutTemplate, Keyboard } from 'lucide-react';
 
-# MangoWC Documentation
+# MangoWC
 
-Welcome to the comprehensive documentation for MangoWC, a dynamic Wayland compositor based on [dwl](https://codeberg.org/dwl/dwl/).
+**MangoWC** is a Wayland compositor development based on [dwl](https://codeberg.org/dwl/dwl/). It aims to be as lightweight as `dwl` and can be built completely within a few seconds, without compromising on functionality.
 
-<Callout>
-  This documentation covers installation, configuration, features, and integrations for MangoWC.
+<Callout type="info" title="Philosophy">
+  **Lightweight & Fast Build**: _Mango_ is designed to be minimal yet functional. It compiles in seconds and offers a robust set of features out of the box.
 </Callout>
 
-## Getting Started
+## Feature Highlights
 
-New to MangoWC? Start here to get up and running quickly.
-
-<Cards>
-  <Card href="/docs/getting-started" title="Getting Started" description="Overview, installation, and basic setup" />
-  <Card href="/docs/getting-started/installation" title="Installation" description="Install MangoWC on your system" />
-  <Card href="/docs/getting-started/basic-setup" title="Basic Setup" description="Configure your first keybindings" />
-</Cards>
-
-## Configuration
-
-Learn how to configure MangoWC for your workflow.
+Beyond basic window management, Mango provides a rich set of features designed for a modern Wayland experience.
 
 <Cards>
-  <Card href="/docs/configuration" title="Configuration Overview" description="Configuration guide and navigation" />
-  <Card href="/docs/configuration/core-settings" title="Core Settings" description="Basic settings, environment, exec commands" />
-  <Card href="/docs/configuration/window-management" title="Window Management" description="Rules, layouts, tags, and workspaces" />
-  <Card href="/docs/configuration/input-devices" title="Input Devices" description="Keyboard, mouse, trackpad, gestures" />
-  <Card href="/docs/configuration/appearance" title="Appearance" description="Effects, animations, borders, colors" />
-  <Card href="/docs/configuration/advanced" title="Advanced Features" description="IPC, scratchpad, virtual monitors" />
+  <Card
+    icon={<Zap />}
+    href="/docs/appearance/animations"
+    title="Fluid Animations"
+    description="Smooth, customizable animations for opening, moving, and closing windows, as well as tag switching."
+  />
+  <Card
+    icon={<LayoutTemplate />}
+    href="/docs/window-management/layouts"
+    title="Flexible Layouts"
+    description="Supports Scroller, Master-Stack, Monocle, Grid, Deck, and more, with per-tag layouts."
+  />
+  <Card
+    icon={<Layers />}
+    href="/docs/appearance/effects"
+    title="Visual Effects"
+    description="Built-in blur, shadows, corner radius, and opacity effects powered by scenefx."
+  />
+  <Card
+    icon={<Keyboard />}
+    href="/docs/advanced/ipc"
+    title="IPC & Scripting"
+    description="Control the compositor externally with robust IPC support for custom scripts and widgets."
+  />
 </Cards>
 
-## Features
+## Additional Features
 
-Explore MangoWC's advanced capabilities.
+- **XWayland Support**: Excellent compatibility for legacy X11 applications.
+- **Tag System**: Uses tags instead of workspaces, allowing separate window layouts for each tag.
+- **Input Methods**: Great support for text input v2/v3 (Fcitx5, IBus).
+- **Window States**: Rich states including swallow, minimize, maximize, fullscreen, and overlay.
+- **Hot-Reload Config**: Simple external configuration that supports hot-reloading without restarting.
+- **Scratchpads**: Support for both Sway-like and named scratchpads.
 
-<Cards>
-  <Card href="/docs/features" title="Features Overview" description="Feature overview and capabilities" />
-  <Card href="/docs/features/layouts" title="Layouts" description="Supported layouts and configuration" />
-  <Card href="/docs/features/animations" title="Animations" description="Animation system and customization" />
-  <Card href="/docs/features/ipc" title="IPC" description="Inter-process communication with mmsg" />
-  <Card href="/docs/features/integrations" title="Integrations" description="Waybar, portals, clipboard, screen sharing" />
-</Cards>
+## Community
 
-## Resources
+Join the discussion, ask for help, or share your setup on our Discord server.
 
-<Cards>
-  <Card href="https://github.com/DreamMaoMao/mangowc" title="GitHub Repository" description="Source code and development" />
-  <Card href="https://discord.gg/CPjbDxesh5" title="Discord Community" description="Join the MangoWC community" />
-  <Card href="https://github.com/DreamMaoMao/mango-config" title="Example Configurations" description="Configuration examples and dotfiles" />
-</Cards>
+[Join MangoWC Discord](https://discord.gg/CPjbDxesh5)
+
+## Acknowledgements
+
+This project is built upon the hard work of several open-source projects:
+
+- **[wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)**: Implementation of Wayland protocol.
+- **[dwl](https://codeberg.org/dwl/dwl)**: The base for Mango's core functionality.
+- **[owl](https://github.com/dqrk0jeste/owl)**: Inspiration for basal window animations.
+- **[scenefx](https://github.com/wlrfx/scenefx)**: The library powering Mango's window effects.
