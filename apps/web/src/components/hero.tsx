@@ -5,12 +5,14 @@ import { MangowcLayouts } from "@/components/mangowc-layouts";
 
 export function Hero() {
 	return (
-		<section className="relative flex items-center justify-center overflow-hidden px-4 py-20 sm:px-6 lg:px-10 min-h-screen">
-			{/* Background grid */}
-			<div className="grid-bg pointer-events-none absolute inset-0 bg-[size:3rem_3rem]" />
-
-			{/* Subtle gradient fade */}
-			<div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/60" />
+		// 1. Changed min-h to screen for full height
+		// 2. Added -mt-16 (negative top margin) to offset the fixed header height so content is optically centered
+		<section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-20 sm:px-6 lg:px-10">
+			{/* Refactored Grid Background:
+                - Removed the separate overlay div
+                - Added [mask-image] for a perfect smooth fade to the bottom
+            */}
+			<div className="grid-bg pointer-events-none absolute inset-0 bg-[size:3rem_3rem] [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]" />
 
 			<div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-14 lg:flex-row lg:items-center lg:gap-20">
 				{/* Left Column */}
@@ -31,7 +33,7 @@ export function Hero() {
 						customizable desktop experience.
 					</p>
 
-					{/* PERFECT button layout */}
+					{/* Buttons */}
 					<div
 						className="
 						flex flex-col gap-4
@@ -41,21 +43,19 @@ export function Hero() {
 					"
 					>
 						<Link
-							href="https://github.com/DreamMaoMao/mangowc"
-							target="_blank"
-							rel="noopener noreferrer"
+							href="/docs/installation"
 							className="rounded-full bg-primary px-8 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.04] hover:opacity-90"
 						>
-							View on GitHub
+							Get Started
 						</Link>
 
 						<Link
-							href="https://discord.gg/CPjbDxesh5"
+							href="https://github.com/DreamMaoMao/mangowc"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="rounded-full border border-border bg-background/60 px-8 py-3 font-semibold text-foreground backdrop-blur-md transition-colors hover:bg-accent hover:text-accent-foreground"
 						>
-							Join Discord
+							View on GitHub
 						</Link>
 					</div>
 				</div>

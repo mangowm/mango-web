@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 
+// ... (MenuIcon and CloseIcon components remain the same) ...
 function MenuIcon({ className }: { className?: string }) {
 	return (
 		<svg
@@ -50,7 +51,8 @@ export function Header() {
 	const { setOpenSearch } = useSearchContext();
 
 	return (
-		<header className="sticky top-0 z-50 border-border border-b bg-background/80 backdrop-blur-md">
+		// UPDATED: sticky -> fixed, added w-full to prevent layout shift
+		<header className="fixed top-0 z-50 w-full border-border border-b bg-background/80 backdrop-blur-md">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
 				<div className="flex items-center gap-8">
 					<Link href="/" className="group flex items-center gap-2">
@@ -82,8 +84,9 @@ export function Header() {
 
 				<div className="flex items-center gap-4">
 					<button
+						type="button"
 						onClick={() => setOpenSearch(true)}
-						className="text-foreground/70 transition-colors hover:text-primary"
+						className="text-foreground/70 transition-colors hover:text-primary cursor-pointer"
 						aria-label="Search documentation"
 					>
 						<Search className="h-5 w-5" />
@@ -147,7 +150,7 @@ export function Header() {
 
 			{/* Mobile Navigation */}
 			{isMobileMenuOpen && (
-				<nav className="mobile-nav border-border border-t md:hidden">
+				<nav className="mobile-nav border-border border-t md:hidden bg-background">
 					<div className="mx-auto max-w-7xl space-y-1 px-4 py-3 sm:px-6 lg:px-8">
 						<Link
 							href="/"
