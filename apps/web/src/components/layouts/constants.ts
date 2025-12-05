@@ -18,4 +18,4 @@ export const CARD_BASE =
 export const CARD_ACTIVE =
 	"border-4 border-primary bg-primary/10 text-primary shadow-2xl z-20";
 export const CARD_INACTIVE =
-	"border-2 border-primary/40 bg-background text-primary/40 z-10";
+	"border-2 border-border bg-muted text-muted-foreground z-10";
