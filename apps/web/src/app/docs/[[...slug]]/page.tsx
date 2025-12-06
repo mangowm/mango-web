@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
-import { LLMCopyButton, ViewOptions } from "@/components/ai/page-actions";
+import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	const params = await props.params;
@@ -47,7 +47,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				<DocsDescription>{page.data.description}</DocsDescription>
 				<DocsBody>
 					<div className="flex flex-row flex-wrap gap-2 items-center border-b pb-6 -mt-6">
-						<LLMCopyButton filePath={`apps/web/content/docs/${page.path}`} />
+						<LLMCopyButton markdownUrl={`${page.url}.mdx`} />
 						<ViewOptions
 							markdownUrl={`${page.url}.mdx`}
 							githubUrl={`https://github.com/atheeq-rhxn/mangowc-web/blob/main/apps/web/content/docs/${page.path}`}

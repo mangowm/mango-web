@@ -1,7 +1,12 @@
 // source.config.ts
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 var docs = defineDocs({
-  dir: "content/docs"
+  dir: "content/docs",
+  docs: {
+    postprocess: {
+      includeProcessedMarkdown: true
+    }
+  }
 });
 var source_config_default = defineConfig({
   mdxOptions: {

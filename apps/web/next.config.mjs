@@ -5,6 +5,14 @@ const withMDX = createMDX();
 const nextConfig = {
 	reactCompiler: false,
 	compress: true,
+	async rewrites() {
+		return [
+			{
+				source: "/docs/:path*.mdx",
+				destination: "/llms.mdx/:path*",
+			},
+		];
+	},
 };
 
 export default withMDX(nextConfig);
