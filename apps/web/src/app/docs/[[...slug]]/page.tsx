@@ -11,7 +11,14 @@ import { notFound } from "next/navigation";
 import { source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
-import { getPageImage } from "@/lib/metadata";
+import {
+	createMetadata,
+	getPageImage,
+	baseUrl,
+	SITE_DESCRIPTION,
+} from "@/lib/metadata";
+
+export const revalidate = false;
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	const params = await props.params;
@@ -21,24 +28,32 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 
 	const { body: MDX, toc } = await page.data.load();
 
-	const baseUrl = "https://mangowc.vercel.app";
-	const pathname = `/docs/${params.slug?.join("/") || ""}`;
-
-	const jsonLdArticle = {
-		"@context": "https://schema.org",
-		"@type": "Article",
-		headline: page.data.title,
-		description: page.data.description,
-		url: `${baseUrl}${pathname}`,
-		publisher: { "@type": "Organization", name: "MangoWC" },
-		datePublished: new Date().toISOString(),
-	};
-
 	return (
 		<>
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "Article",
+						headline: page.data.title,
+						description: page.data.description,
+						author: {
+							"@type": "Organization",
+							name: "MangoWC",
+						},
+						publisher: {
+							"@type": "Organization",
+							name: "MangoWC",
+						},
+						datePublished: new Date().toISOString(),
+						dateModified: new Date().toISOString(),
+						mainEntityOfPage: {
+							"@type": "WebPage",
+							"@id": `${baseUrl}/docs/${page.slugs.join("/")}`,
+						},
+					}),
+				}}
 			/>
 			<DocsPage
 				toc={toc}
@@ -78,29 +93,28 @@ export async function generateMetadata(
 ): Promise<Metadata> {
 	const params = await props.params;
 	const page = source.getPage(params.slug);
-	if (!page) notFound();
+	if (!page)
+		return createMetadata({
+			title: "Not Found",
+		});
 
-	const baseUrl = "https://mangowc.vercel.app";
-	const pathname = `/docs/${params.slug?.join("/") || ""}`;
-	const ogImage = getPageImage(page).url;
+	const description = page.data.description ?? SITE_DESCRIPTION;
 
-	return {
+	const image = {
+		url: getPageImage(page).url,
+		width: 1200,
+		height: 630,
+	};
+
+	return createMetadata({
 		title: page.data.title,
-		description: page.data.description,
+		description,
 		openGraph: {
-			title: page.data.title,
-			description: page.data.description,
-			url: `${baseUrl}${pathname}`,
-			siteName: "MangoWC",
-			images: [{ url: `${baseUrl}${ogImage}`, alt: page.data.title }],
-			type: "article",
+			url: `/docs/${page.slugs.join("/")}`,
+			images: [image],
 		},
 		twitter: {
-			card: "summary_large_image",
-			title: page.data.title,
-			description: page.data.description,
-			images: [`${baseUrl}${ogImage}`],
+			images: [image],
 		},
-		alternates: { canonical: `${baseUrl}${pathname}` },
-	};
+	});
 }

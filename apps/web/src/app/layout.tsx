@@ -5,10 +5,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../index.css";
 import { AppProviders } from "@/components/app-providers";
 import Providers from "@/components/providers";
+import { createMetadata, SITE_DESCRIPTION } from "@/lib/metadata";
 
 const SITE_TITLE = "MangoWC - Lightweight Wayland Compositor";
-const SITE_DESCRIPTION =
-	"MangoWC is a lightweight, high-performance Wayland compositor built on dwl, designed for speed, flexibility, and a modern, customizable desktop experience.";
 const SITE_URL = "https://mangowc.vercel.app";
 const SITE_OG_IMAGE = "/image.webp";
 const IMAGE_VERSION = "3";
@@ -55,61 +54,19 @@ const jsonLdOrganization = {
 	sameAs: ["https://github.com/DreamMaoMao/mangowc"],
 };
 
-export const metadata: Metadata = {
-	metadataBase: new URL(SITE_URL),
+export const metadata = createMetadata({
 	title: {
-		default: SITE_TITLE,
 		template: "%s | MangoWC",
+		default: "MangoWC",
 	},
 	description: SITE_DESCRIPTION,
-	keywords: [
-		"wayland compositor",
-		"window manager",
-		"dwl",
-		"linux",
-		"lightweight wm",
-	],
 	openGraph: {
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
-		url: SITE_URL,
-		siteName: "MangoWC",
-		images: [
-			{
-				url: `${SITE_OG_IMAGE}?v=${IMAGE_VERSION}`,
-				width: 1200,
-				height: 630,
-				alt: "MangoWC Wayland Compositor",
-			},
-		],
-		locale: "en_US",
-		type: "website",
+		images: "/banner.webp",
 	},
 	twitter: {
-		card: "summary_large_image",
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
-		images: [`${SITE_OG_IMAGE}?v=${IMAGE_VERSION}`],
-		creator: TWITTER_CREATOR,
+		images: "/banner.webp",
 	},
-	icons: {
-		icon: "/favicon.ico",
-		apple: "/logo-192x192.webp",
-	},
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-			"max-video-preview": -1,
-		},
-	},
-	alternates: { canonical: SITE_URL },
-	category: "Software",
-};
+});
 
 export default function RootLayout({
 	children,

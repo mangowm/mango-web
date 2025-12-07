@@ -1,4 +1,66 @@
+import type { Metadata } from "next/types";
 import type { Page } from "./source";
+
+const IMAGE_VERSION = "4";
+
+export function createMetadata(override: Metadata): Metadata {
+	return {
+		metadataBase: baseUrl,
+		keywords: [
+			"wayland compositor",
+			"window manager",
+			"dwl",
+			"linux",
+			"lightweight wm",
+		],
+		icons: {
+			icon: "/favicon.ico",
+			apple: "/logo-192x192.webp",
+		},
+		robots: {
+			index: true,
+			follow: true,
+			googleBot: {
+				index: true,
+				follow: true,
+				"max-image-preview": "large",
+				"max-snippet": -1,
+				"max-video-preview": -1,
+			},
+		},
+		category: "Software",
+		...override,
+		openGraph: {
+			title: override.title ?? undefined,
+			description: override.description ?? undefined,
+			url: "https://mangowc.vercel.app",
+			images: `/banner.webp?v=${IMAGE_VERSION}`,
+			siteName: "MangoWC",
+			locale: "en_US",
+			type: "website",
+			...override.openGraph,
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: override.title ?? undefined,
+			description: override.description ?? undefined,
+			images: `/banner.webp?v=${IMAGE_VERSION}`,
+			...override.twitter,
+		},
+		alternates: {
+			canonical: "https://mangowc.vercel.app",
+			types: {
+				"application/rss+xml": [
+					{
+						title: "MangoWC Updates",
+						url: "https://mangowc.vercel.app/rss.xml",
+					},
+				],
+			},
+			...override.alternates,
+		},
+	};
+}
 
 export function getPageImage(page: Page) {
 	const segments = [...page.slugs, "image.webp"];
@@ -8,3 +70,12 @@ export function getPageImage(page: Page) {
 		url: `/og/${segments.join("/")}`,
 	};
 }
+
+export const SITE_DESCRIPTION =
+	"MangoWC is a fast, lightweight, modern Wayland compositor.";
+
+export const baseUrl =
+	process.env.NODE_ENV === "development" ||
+	!process.env.VERCEL_PROJECT_PRODUCTION_URL
+		? new URL("http://localhost:3000")
+		: new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`);
