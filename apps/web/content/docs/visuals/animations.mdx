@@ -21,11 +21,39 @@ You can define different animation styles for opening and closing windows.
 **Available Types:** `slide`, `zoom`, `fade`, `none`.
 
 ```ini
-animation_type_open=slide
+animation_type_open=zoom
 animation_type_close=slide
 layer_animation_type_open=slide
 layer_animation_type_close=slide
 ```
+
+## Fade Settings
+
+Control the fade-in and fade-out effects for animations.
+
+```ini
+animation_fade_in=1
+animation_fade_out=1
+fadein_begin_opacity=0.5
+fadeout_begin_opacity=0.8
+```
+
+- `animation_fade_in`: Enable fade-in effect (0-disable, 1-enable)
+- `animation_fade_out`: Enable fade-out effect (0-disable, 1-enable)
+- `fadein_begin_opacity`: Starting opacity for fade-in animations (0.0-1.0)
+- `fadeout_begin_opacity`: Starting opacity for fade-out animations (0.0-1.0)
+
+## Zoom Settings
+
+Adjust the zoom ratios for zoom animations.
+
+```ini
+zoom_initial_ratio=0.3
+zoom_end_ratio=0.7
+```
+
+- `zoom_initial_ratio`: Initial zoom ratio
+- `zoom_end_ratio`: End zoom ratio
 
 ## Durations
 
@@ -38,6 +66,15 @@ Control the speed of animations (in milliseconds).
 | Window Close | `animation_duration_close` | `800` |
 | Tag Switch | `animation_duration_tag` | `350` |
 | Focus Change | `animation_duration_focus` | `0` |
+
+```ini
+# Example duration configuration
+animation_duration_move=500
+animation_duration_open=400
+animation_duration_tag=350
+animation_duration_close=800
+animation_duration_focus=400
+```
 
 ## Custom Bezier Curves
 
@@ -55,8 +92,25 @@ The format is `x1,y1,x2,y2`.
 | Tag switch | `animation_curve_tag` | `0.46,1.0,0.29,1` |
 | Focus Opacity Change | `animation_curve_focus` | `0.46,1.0,0.29,1` |
 
+```ini
+# Example bezier curves
+animation_curve_open=0.46,1.0,0.29,1.1
+animation_curve_move=0.46,1.0,0.29,1
+animation_curve_tag=0.46,1.0,0.29,1
+animation_curve_close=0.08,0.92,0,1
+animation_curve_focus=0.46,1.0,0.29,1
+```
+
 <Accordions>
 <Accordion title="How to find curve values">
 You can visualize and generate these values using online tools like [cssportal.com](https://www.cssportal.com/css-cubic-bezier-generator/) or [easings.net](https://easings.net).
 </Accordion>
 </Accordions>
+
+## Tag Animation Direction
+
+Control the direction of tag switch animations.
+
+| Setting | Default | Description |
+| :--- | :--- | :--- |
+| `tag_animation_direction` | `1` | Tag animation direction (1-horizontal, 0-vertical) |

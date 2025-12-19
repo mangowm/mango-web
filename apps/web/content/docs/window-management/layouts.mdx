@@ -39,6 +39,19 @@ The Scroller layout positions windows in a scrollable strip, similar to PaperWM.
 | `scroller_prefer_center` | `0` | Center focused window only if it was outside the view. |
 | `edge_scroller_pointer_focus` | `1` | Focus windows even if partially off-screen. |
 | `scroller_proportion_preset` | `0.5,0.8,1.0` | Presets for cycling window widths. |
+| `scroller_ignore_proportion_single` | `0` | Ignore proportion adjustments for single windows. |
+| `scroller_default_proportion_single` | `1.0` | Default proportion for single windows in scroller. |
+
+```ini
+# Example scroller configuration
+scroller_structs=20
+scroller_default_proportion=0.8
+scroller_focus_center=0
+scroller_prefer_center=1
+edge_scroller_pointer_focus=1
+scroller_default_proportion_single=1.0
+scroller_proportion_preset=0.5,0.8,1.0
+```
 
 
 
@@ -53,6 +66,15 @@ These settings apply to layouts like `tile` and `center_tile`.
 | `default_nmaster` | `1` | Number of allowed master windows. |
 | `smartgaps` | `0` | Disable gaps when only one window is present. |
 | `center_master_overspread` | `0` | (Center Tile) Master spreads across screen if no stack exists. |
+| `center_when_single_stack` | `1` | (Center Tile) Center master when only one stack window exists. |
+
+```ini
+# Example master-stack configuration
+new_is_master=1
+smartgaps=0
+default_mfact=0.55
+default_nmaster=1
+```
 
 
 
