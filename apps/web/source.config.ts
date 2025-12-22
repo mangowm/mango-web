@@ -7,7 +7,7 @@ export const docs = defineDocs({
 			includeProcessedMarkdown: true,
 			extractLinkReferences: true,
 		},
-		async: false,
+		async: true,
 	},
 });
 

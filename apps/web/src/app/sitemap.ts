@@ -4,7 +4,7 @@ import { source } from "@/lib/source";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const docsPages = source.getPages().map((page) => ({
-		url: `${baseUrl}/docs/${page.slugs.join("/")}`,
+		url: `${baseUrl.toString()}/docs/${page.slugs.join("/")}`,
 		lastModified: new Date(),
 		changeFrequency: "monthly" as const,
 		priority: 0.8,
@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 	return [
 		{
-			url: baseUrl,
+			url: baseUrl.toString(),
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 1,
