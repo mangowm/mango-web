@@ -15,18 +15,26 @@ import {
 	getPageImage,
 	SITE_DESCRIPTION,
 } from "@/lib/metadata";
-import { source } from "@/lib/source";
+import { type Page, source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 
 export const revalidate = false;
 
-export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
+export default async function DocPage(props: PageProps<"/docs/[[...slug]]">) {
 	const params = await props.params;
 	const page = source.getPage(params.slug);
 
 	if (!page) notFound();
 
-	const { body: MDX, toc } = await page.data.load();
+	const {
+		body: MDX,
+		toc,
+		full,
+	} = await (
+		page.data as {
+			load: () => Promise<{ body: any; toc: any; full?: boolean }>;
+		}
+	).load();
 
 	return (
 		<>
@@ -55,11 +63,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 					}),
 				}}
 			/>
-			<DocsPage
-				toc={toc}
-				full={page.data.full}
-				tableOfContent={{ style: "clerk" }}
-			>
+			<DocsPage toc={toc} full={full} tableOfContent={{ style: "clerk" }}>
 				<DocsTitle>{page.data.title}</DocsTitle>
 				<DocsDescription className="mb-2">
 					{page.data.description}
