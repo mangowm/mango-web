@@ -6,6 +6,7 @@ description: Install MangoWC on Arch, Fedora, Gentoo, Guix System, NixOS, PikaOS
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
 ## Prerequisites
 
@@ -136,38 +137,86 @@ For more information, see the [Guix System documentation](https://guix.gnu.org/m
 </Tab>
 
 <Tab value="NixOS">
-The repository provides a Flake with a NixOS module and a Home Manager module.
+The repository provides a Flake with a NixOS module.
 
-**Example `flake.nix` configuration:**
+<Steps>
+<Step>
+**1. Add flake input**
 
 ```nix
+# flake.nix
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    mangowc = {
+      url = "github:DreamMaoMao/mangowc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mango = {
-      url = "github:DreamMaoMao/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  outputs = inputs@{ self, nixpkgs, mango, ... }: {
-    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        mango.nixosModules.mango
-        {
-          programs.mango.enable = true;
-        }
-      ];
-    };
+    # other inputs ...
   };
 }
 ```
+</Step>
+<Step>
+**2. Import the NixOS module**
 
+<Accordions>
+<Accordion title="Option 1: Import in configuration.nix">
+
+```nix
+# configuration.nix (or any other file that you import)
+{inputs, ...}: {
+  imports = [
+    inputs.mangowc.nixosModules.default
+    # .. other imports ...
+  ];
+
+  # ...
+}
+```
+
+</Accordion>
+<Accordion title="Option 2: Import directly in flake">
+
+```nix
+# flake.nix
+{
+  # ...
+
+  outputs = { self, nixpkgs, mangowc, ...}@inputs: let  # <- if `mangowc` is not added here you may refer to it using `inputs.mangowc`
+    inherit (nixpkgs) lib;
+    # ...
+  in {
+    nixosConfigurations.YourHostName = lib.nixosSystem {
+      modules = [
+        mangowc.nixosModules.default # or inputs.mangowc.nixosModules.default
+        # other imports ...
+      ];
+    };
+  }
+}
+```
+
+</Accordion>
+</Accordions>
+</Step>
+<Step>
+**3. Enable the module**
+
+```nix
+# configuration.nix (or any other file that you import)
+{
+  programs.mango.enable = true;
+}
+```
+</Step>
+<Step>
+**Extra options**
+
+- `programs.mango.package` - the mango package to use, allows usage of custom mango drvs
+- `programs.mango.addLoginEntry` (default: true) - adds login entry to the display manager
+</Step>
+</Steps>
 </Tab>
 
 <Tab value="PikaOS">
