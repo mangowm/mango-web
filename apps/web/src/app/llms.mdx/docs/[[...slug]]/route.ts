@@ -6,10 +6,10 @@ export const revalidate = false;
 
 export async function GET(
 	_req: Request,
-	{ params }: RouteContext<"/llms.mdx/[[...slug]]">,
+	{ params }: RouteContext<"/llms.mdx/docs/[[...slug]]">,
 ) {
 	const { slug } = await params;
-	const page = source.getPage(slug);
+	const page = source.getPage(slug?.slice(0, -1));
 	if (!page) notFound();
 
 	return new Response(await getLLMText(page), {
@@ -20,5 +20,7 @@ export async function GET(
 }
 
 export function generateStaticParams() {
-	return source.generateParams();
+	return source.getPages().map((page) => ({
+		slug: [...page.slugs, "index.mdx"],
+	}));
 }
