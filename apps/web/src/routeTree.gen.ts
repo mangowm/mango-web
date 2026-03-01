@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReleasesRouteImport } from './routes/releases'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as IndexRouteImport } from './routes/index'
@@ -16,6 +17,11 @@ import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as ApiSearchRouteImport } from './routes/api/search'
 import { Route as LlmsDotmdxDocsSplatRouteImport } from './routes/llms[.]mdx.docs.$'
 
+const ReleasesRoute = ReleasesRouteImport.update({
+  id: '/releases',
+  path: '/releases',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
   id: '/llms.txt',
   path: '/llms.txt',
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/releases': typeof ReleasesRoute
   '/api/search': typeof ApiSearchRoute
   '/docs/$': typeof DocsSplatRoute
   '/llms.mdx/docs/$': typeof LlmsDotmdxDocsSplatRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/releases': typeof ReleasesRoute
   '/api/search': typeof ApiSearchRoute
   '/docs/$': typeof DocsSplatRoute
   '/llms.mdx/docs/$': typeof LlmsDotmdxDocsSplatRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/releases': typeof ReleasesRoute
   '/api/search': typeof ApiSearchRoute
   '/docs/$': typeof DocsSplatRoute
   '/llms.mdx/docs/$': typeof LlmsDotmdxDocsSplatRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/llms-full.txt'
     | '/llms.txt'
+    | '/releases'
     | '/api/search'
     | '/docs/$'
     | '/llms.mdx/docs/$'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/llms-full.txt'
     | '/llms.txt'
+    | '/releases'
     | '/api/search'
     | '/docs/$'
     | '/llms.mdx/docs/$'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/llms-full.txt'
     | '/llms.txt'
+    | '/releases'
     | '/api/search'
     | '/docs/$'
     | '/llms.mdx/docs/$'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
+  ReleasesRoute: typeof ReleasesRoute
   ApiSearchRoute: typeof ApiSearchRoute
   DocsSplatRoute: typeof DocsSplatRoute
   LlmsDotmdxDocsSplatRoute: typeof LlmsDotmdxDocsSplatRoute
@@ -110,6 +123,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/releases': {
+      id: '/releases'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof ReleasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/llms.txt': {
       id: '/llms.txt'
       path: '/llms.txt'
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
+  ReleasesRoute: ReleasesRoute,
   ApiSearchRoute: ApiSearchRoute,
   DocsSplatRoute: DocsSplatRoute,
   LlmsDotmdxDocsSplatRoute: LlmsDotmdxDocsSplatRoute,
