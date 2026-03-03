@@ -2,12 +2,12 @@ import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Streamdown } from "streamdown";
 import { code } from "@streamdown/code";
+import releases from "../../public/releases.json";
 
 export const Route = createFileRoute("/releases")({
   component: Releases,
   loader: async () => {
-    const res = await fetch("/releases.json");
-    return res.json() as Promise<GitHubRelease[]>;
+    return releases as GitHubRelease[];
   },
 });
 

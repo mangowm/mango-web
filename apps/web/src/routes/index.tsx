@@ -29,9 +29,9 @@ const DiscordIcon = memo(function DiscordIcon() {
 });
 
 const NAV_LINKS: LinkItemType[] = [
-  { text: "Docs", url: "/mango-web/docs" },
-  { text: "Editor", url: "/mango-web/editor" },
-  { text: "Releases", url: "/mango-web/releases" },
+  { text: "Docs", url: "/docs" },
+  { text: "Editor", url: "/editor" },
+  { text: "Releases", url: "/releases" },
   {
     type: "icon",
     url: "https://discord.gg/CPjbDxesh5",
