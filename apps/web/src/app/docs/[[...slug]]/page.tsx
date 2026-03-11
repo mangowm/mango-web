@@ -48,11 +48,11 @@ export default async function DocPage(props: PageProps<"/docs/[[...slug]]">) {
 						description: page.data.description,
 						author: {
 							"@type": "Organization",
-							name: "MangoWC",
+							name: "MangoWM",
 						},
 						publisher: {
 							"@type": "Organization",
-							name: "MangoWC",
+							name: "MangoWM",
 						},
 						datePublished: new Date().toISOString(),
 						dateModified: new Date().toISOString(),
@@ -74,7 +74,7 @@ export default async function DocPage(props: PageProps<"/docs/[[...slug]]">) {
 					/>
 					<ViewOptions
 						markdownUrl={`/llms.mdx/docs/${[...page.slugs, "index.mdx"].join("/")}`}
-						githubUrl={`https://github.com/mangowm/mango-web/blob/main/apps/web/content/docs/${page.path}`}
+						githubUrl={`https://github.com/mangowm/mangowm.github.io/blob/main/apps/web/content/docs/${page.path}`}
 					/>
 				</div>
 				<div className="prose prose-no-margin flex-1 text-fd-foreground/90">

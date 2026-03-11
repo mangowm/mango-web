@@ -26,7 +26,7 @@ export function Highlights() {
 			<div className="mx-auto max-w-7xl">
 				<div className="mb-16 text-center">
 					<h2 className="mb-4 text-balance font-bold text-4xl text-foreground sm:text-5xl">
-						Why Choose MangoWC
+						Why Choose MangoWM
 					</h2>
 					<p className="mx-auto max-w-2xl text-balance text-foreground/70 text-lg">
 						A modern Wayland compositor that combines dwl's speed with advanced

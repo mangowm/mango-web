@@ -80,7 +80,7 @@ export function SponsorButton() {
 				<Button
 					variant="ghost"
 					size="sm"
-					aria-label="Sponsor MangoWC"
+					aria-label="Sponsor MangoWM"
 					className="group flex items-center gap-2 bg-red-50 text-red-600 transition-all hover:bg-red-100 hover:text-red-700 active:scale-95 sm:px-4 dark:bg-red-950 dark:text-red-400 dark:hover:bg-red-900 dark:hover:text-red-300"
 				>
 					<Heart className="h-4 w-4 fill-current transition-transform group-hover:scale-110" />
@@ -93,7 +93,7 @@ export function SponsorButton() {
 					<div className="p-5 pb-0 sm:p-8 sm:pb-4">
 						<DialogHeader>
 							<DialogTitle className="font-extrabold text-xl tracking-tight sm:text-3xl">
-								Support MangoWC
+								Support MangoWM
 							</DialogTitle>
 							<DialogDescription className="mt-1 max-w-md text-muted-foreground text-xs sm:mt-2 sm:text-base">
 								Help sustain open-source development.

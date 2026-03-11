@@ -5,7 +5,7 @@ import { AppProviders } from "@/components/app-providers";
 import Providers from "@/components/providers";
 import { createMetadata, SITE_DESCRIPTION } from "@/lib/metadata";
 
-const SITE_TITLE = "MangoWC - Lightweight Wayland Compositor";
+const SITE_TITLE = "MangoWM - Lightweight Wayland Compositor";
 const SITE_URL = "https://mangowm.github.io";
 const SITE_OG_IMAGE = "/image.webp";
 const IMAGE_VERSION = "3";
@@ -46,7 +46,7 @@ const jsonLdSoftware = {
 const jsonLdOrganization = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
-	name: "MangoWC",
+	name: "MangoWM",
 	url: SITE_URL,
 	logo: `${SITE_URL}/favicon/web-app-manifest-512x512.webp`,
 	sameAs: ["https://github.com/mangowm/mango"],
@@ -54,8 +54,8 @@ const jsonLdOrganization = {
 
 export const metadata = createMetadata({
 	title: {
-		template: "%s | MangoWC",
-		default: "MangoWC",
+		template: "%s | MangoWM",
+		default: "MangoWM",
 	},
 	description: SITE_DESCRIPTION,
 	openGraph: {

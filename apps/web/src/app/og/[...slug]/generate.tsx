@@ -40,7 +40,7 @@ export async function getImageResponseOptions(): Promise<ImageResponseOptions> {
 }
 
 export async function generate({ title, description }: GenerateProps) {
-	const siteName = "MangoWC";
+	const siteName = "MangoWM";
 	const primaryTextColor = "rgb(240,240,240)";
 	const logoSrc = await logoData;
 	const logo = (

@@ -28,7 +28,7 @@ export function Hero() {
 					</h1>
 
 					<p className="mx-auto mb-10 max-w-xl text-balance text-base text-muted-foreground sm:text-lg md:text-xl lg:mx-0">
-						MangoWC is a modern, lightweight, high-performance Wayland
+						MangoWM is a modern, lightweight, high-performance Wayland
 						compositor built on dwl — crafted for speed, flexibility, and a
 						customizable desktop experience.
 					</p>

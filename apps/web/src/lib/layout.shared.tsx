@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const logo = (
 	<Image
-		alt="MangoWC"
+		alt="MangoWM"
 		src="/logo-32x32.webp"
 		width={32}
 		height={32}
@@ -17,7 +17,7 @@ export function baseOptions(): BaseLayoutProps {
 			title: (
 				<>
 					{logo}
-					<span className="font-medium max-md:hidden">MangoWC</span>
+					<span className="font-medium max-md:hidden">MangoWM</span>
 				</>
 			),
 		},

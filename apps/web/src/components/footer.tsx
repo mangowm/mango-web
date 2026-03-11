@@ -10,12 +10,12 @@ export function Footer() {
 						<div className="mb-4 flex items-center gap-2">
 							<Image
 								src="/logo-32x32.webp"
-								alt="MangoWC Logo"
+								alt="MangoWM Logo"
 								width={32}
 								height={32}
 								className="h-8 w-8 rounded-lg"
 							/>
-							<span className="font-bold text-foreground">MangoWC</span>
+							<span className="font-bold text-foreground">MangoWM</span>
 						</div>
 						<p className="text-foreground/70 text-sm">
 							A minimal, fast, and modern Wayland compositor.

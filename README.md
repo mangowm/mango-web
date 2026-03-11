@@ -14,8 +14,8 @@ This site provides detailed documentation, configuration guides, and developer r
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/mangowm/mango-web.git
-cd mango-web
+git clone https://github.com/mangowm/mangowm.github.io.git
+cd mangowm.github.io
 ```
 
 ### 2. Install dependencies
@@ -52,7 +52,7 @@ Once running, open [http://localhost:3001](http://localhost:3001) in your browse
 ## 🏗️ Project Structure
 
 ```
-mango-web/
+mangowm.github.io/
 ├── docs/                     # Markdown/MDX documentation content
 ├── apps/
 │   └── web/                  # Main Next.js application

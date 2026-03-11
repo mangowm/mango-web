@@ -1,7 +1,7 @@
 {
-	"name": "MangoWC",
-	"short_name": "MangoWC",
-	"description": "MangoWC Web App",
+	"name": "MangoWM",
+	"short_name": "MangoWM",
+	"description": "MangoWM Web App",
 	"icons": [
 		{
 			"src": "favicon/web-app-manifest-192x192.webp",

@@ -59,12 +59,12 @@ export function Header() {
 					<Link href="/" className="group flex items-center gap-2">
 						<Image
 							src="/logo-32x32.webp"
-							alt="MangoWC Logo"
+							alt="MangoWM Logo"
 							width={32}
 							height={32}
 							className="h-8 w-8 rounded-lg transition-transform group-hover:scale-110"
 						/>
-						<span className="font-bold text-foreground text-lg">MangoWC</span>
+						<span className="font-bold text-foreground text-lg">MangoWM</span>
 					</Link>
 
 					<nav className="header-nav hidden items-center gap-8 md:flex">

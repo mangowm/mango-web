@@ -1,6 +1,6 @@
 ---
 title: Basic Configuration
-description: Learn how to configure MangoWC files, environment variables, and autostart scripts.
+description: Learn how to configure MangoWM files, environment variables, and autostart scripts.
 ---
 
 import { Steps, Step } from 'fumadocs-ui/components/steps';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Configuration File
 
-MangoWC uses a simple configuration file format. By default, it looks for a configuration file in `~/.config/mango/`.
+MangoWM uses a simple configuration file format. By default, it looks for a configuration file in `~/.config/mango/`.
 
 <Steps>
   <Step>
@@ -30,7 +30,7 @@ MangoWC uses a simple configuration file format. By default, it looks for a conf
   <Step>
     **Launch with Custom Config (Optional)**
     
-    If you prefer to keep your config elsewhere, you can launch MangoWC with the `-c` flag.
+    If you prefer to keep your config elsewhere, you can launch MangoWM with the `-c` flag.
 
     ```bash
     mango -c /path/to/your_config.conf
@@ -55,7 +55,7 @@ source-optional=~/.config/mango/optional.conf
 
 ### Validate Configuration
 
-You can check your configuration for errors without starting MangoWC:
+You can check your configuration for errors without starting MangoWM:
 
 ```bash
 mango -p /path/to/config.conf
@@ -78,11 +78,11 @@ env=XCURSOR_SIZE,24
 
 ## Autostart
 
-MangoWC can automatically run commands or scripts upon startup. There are two modes for execution:
+MangoWM can automatically run commands or scripts upon startup. There are two modes for execution:
 
 | Command | Behavior | Usage Case |
 | :--- | :--- | :--- |
-| `exec-once` | Runs **only once** when MangoWC starts. | Status bars, Wallpapers, Notification daemons |
+| `exec-once` | Runs **only once** when MangoWM starts. | Status bars, Wallpapers, Notification daemons |
 | `exec` | Runs **every time** the config is reloaded. | Scripts that need to refresh settings |
 
 ### Example Setup

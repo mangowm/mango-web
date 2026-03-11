@@ -39,7 +39,7 @@ export function createMetadata(override: Metadata): Metadata {
 			description: override.description ?? undefined,
 			url: "https://mangowm.github.io",
 			images: `/banner.webp?v=${IMAGE_VERSION}`,
-			siteName: "MangoWC",
+			siteName: "MangoWM",
 			locale: "en_US",
 			type: "website",
 			...override.openGraph,
@@ -55,7 +55,7 @@ export function createMetadata(override: Metadata): Metadata {
 			types: {
 				"application/rss+xml": [
 					{
-						title: "MangoWC Updates",
+						title: "MangoWM Updates",
 						url: "https://mangowm.github.io/rss.xml",
 					},
 				],
@@ -75,7 +75,7 @@ export function getPageImage(page: Page) {
 }
 
 export const SITE_DESCRIPTION =
-	"MangoWC is a fast, lightweight, modern Wayland compositor.";
+	"MangoWM is a fast, lightweight, modern Wayland compositor.";
 
 export const baseUrl =
 	process.env.NODE_ENV === "development"
