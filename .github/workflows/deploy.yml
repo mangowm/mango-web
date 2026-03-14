@@ -19,7 +19,7 @@ jobs:
       - run: cd apps/web && bun run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/web/out
+          path: apps/web/.output/public
 
   deploy:
     needs: build
