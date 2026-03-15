@@ -4,20 +4,22 @@ import { staticFunctionMiddleware } from "@tanstack/start-static-server-function
 import { useFumadocsLoader } from "fumadocs-core/source/client";
 import browserCollections from "fumadocs-mdx:collections/browser";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page";
-import defaultMdxComponents from "fumadocs-ui/mdx";
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+  MarkdownCopyButton,
+} from "fumadocs-ui/layouts/docs/page";
 import { Suspense } from "react";
 
-import { LLMCopyButton, ViewOptions } from "@/components/ai/page-actions";
-import { baseOptions, gitConfig, sourceGitConfig } from "@/lib/layout.shared";
+import { useMDXComponents } from "@/components/mdx";
+import { baseOptions, sourceGitConfig } from "@/lib/layout.shared";
 import { source } from "@/lib/source";
+import { ViewOptions } from "@/components/view-options";
 
 export const Route = createFileRoute("/docs/$")({
   component: Page,
-  head: ({ loaderData }) => {
-    const title = loaderData?.title ?? "Docs";
-    return { meta: [{ title: `${title} | mangowm` }] };
-  },
   loader: async ({ params }) => {
     const slugs = params._splat?.split("/") ?? [];
     const data = await loader({ data: slugs });
@@ -38,7 +40,6 @@ const loader = createServerFn({
     return {
       slugs: page.slugs,
       path: page.path,
-      title: page.data.title,
       pageTree: await source.serializePageTree(source.getPageTree()),
     };
   });
@@ -46,7 +47,6 @@ const loader = createServerFn({
 const clientLoader = browserCollections.docs.createClientLoader({
   component(
     { toc, frontmatter, default: MDX },
-    // you can define props for the component
     {
       markdownUrl,
       path,
@@ -55,6 +55,8 @@ const clientLoader = browserCollections.docs.createClientLoader({
       path: string;
     },
   ) {
+    const title = `${frontmatter.title} | mangowm`;
+
     return (
       <DocsPage
         toc={toc}
@@ -62,21 +64,19 @@ const clientLoader = browserCollections.docs.createClientLoader({
           style: "clerk",
         }}
       >
+        <title>{title}</title>
+        <meta name="description" content={frontmatter.description} />
         <DocsTitle>{frontmatter.title}</DocsTitle>
         <DocsDescription>{frontmatter.description}</DocsDescription>
         <div className="flex flex-row gap-2 items-center border-b -mt-4 pb-6">
-          <LLMCopyButton markdownUrl={markdownUrl} />
+          <MarkdownCopyButton markdownUrl={markdownUrl} />
           <ViewOptions
             markdownUrl={markdownUrl}
             githubUrl={`https://github.com/${sourceGitConfig.user}/${sourceGitConfig.repo}/blob/${sourceGitConfig.branch}/apps/web/content/docs/${path}`}
           />
         </div>
         <DocsBody>
-          <MDX
-            components={{
-              ...defaultMdxComponents,
-            }}
-          />
+          <MDX components={useMDXComponents()} />
         </DocsBody>
       </DocsPage>
     );

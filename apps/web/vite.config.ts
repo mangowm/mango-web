@@ -25,7 +25,15 @@ export default defineConfig({
           crawlLinks: true,
         },
       },
-      pages: [{ path: "/" }, { path: "/releases" }, { path: "/editor" }, { path: "/docs" }, { path: "/api/search"}],
+      pages: [
+        { path: "/" },
+        { path: "/releases" },
+        { path: "/editor" },
+        { path: "/docs" },
+        { path: "/api/search" },
+        { path: "llms-full.txt" },
+        { path: "llms.txt" },
+      ],
     }),
     react(),
     // please see https://tanstack.com/start/latest/docs/framework/react/guide/hosting#nitro for guides on hosting

@@ -42,14 +42,14 @@
     "body": "### ✨ New Features\r\n- add `drag_tile_refresh_interval` and `drag_floating_refresh_interval` to custom the refresh speed when resize window by drag\r\n- support the repeated exchange of the same two clients  by stack focus order\r\n-  `monitor` option in windowrule support make,model,serial field match\r\n- add windowrule option `indleinhibit_when_focus` for some game window\r\n- add `custom` option to monitorrule to allow monitor set force custom mode.\r\n- add `next` and `prev` arg to `switch_proportion_preset` dispatch\r\n---\r\n\r\n### 🐛 Bug Fixes\r\n- position of popup menu is not constraints correctly \r\n- avoid mutual influence of monitor rules\r\n- potential crashes when enable cursor_hide_timeout\r\n\r\n---\r\n\r\n### ⚡ Optimizations\r\n- optimize the smoothness of the  resieze windows by keybind or mouse drag.\r\n- the tiling related layout keeps the window size unchanged when other windows trigger floating, maximizing and full screen\r\n- only automatically set the focus when the layer requests the on-demand focus when it  request in init_commit\r\n",
     "reactions": {
       "url": "https://api.github.com/repos/mangowm/mango/releases/294980762/reactions",
-      "total_count": 24,
-      "+1": 8,
+      "total_count": 26,
+      "+1": 9,
       "-1": 0,
       "laugh": 0,
       "hooray": 0,
       "confused": 0,
       "heart": 11,
-      "rocket": 5,
+      "rocket": 6,
       "eyes": 0
     }
   },
