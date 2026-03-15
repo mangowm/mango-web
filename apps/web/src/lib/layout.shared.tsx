@@ -9,8 +9,9 @@ export const gitConfig = {
 
 export const sourceGitConfig = {
   user: siteConfig.name,
-  repo: "mangowm.github.io",
+  repo: "mango",
   branch: "main",
+  docsPath: "docs",
 };
 
 export function baseOptions(): BaseLayoutProps {
