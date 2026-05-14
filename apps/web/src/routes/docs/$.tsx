@@ -1,8 +1,7 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
 import { useFumadocsLoader } from "fumadocs-core/source/client";
-import browserCollections from "fumadocs-mdx:collections/browser";
+import browserCollections from "collections/browser";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import {
   DocsBody,
@@ -20,19 +19,20 @@ import { ViewOptions } from "@/components/view-options";
 
 export const Route = createFileRoute("/docs/$")({
   component: Page,
+  pendingMs: 100,
+  pendingMinMs: 300,
   loader: async ({ params }) => {
     const slugs = params._splat?.split("/") ?? [];
-    const data = await loader({ data: slugs });
+    const data = await serverLoader({ data: slugs });
     await clientLoader.preload(data.path);
     return data;
   },
 });
 
-const loader = createServerFn({
+const serverLoader = createServerFn({
   method: "GET",
 })
   .inputValidator((slugs: string[]) => slugs)
-  .middleware([staticFunctionMiddleware])
   .handler(async ({ data: slugs }) => {
     const page = source.getPage(slugs);
     if (!page) throw notFound();
@@ -89,7 +89,7 @@ function Page() {
 
   return (
     <DocsLayout {...baseOptions()} tree={pageTree}>
-      <Link to={markdownUrl} hidden />
+      <a href={markdownUrl} hidden aria-hidden />
       <Suspense>{clientLoader.useContent(path, { markdownUrl, path })}</Suspense>
     </DocsLayout>
   );

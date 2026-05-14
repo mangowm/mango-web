@@ -90,7 +90,7 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning className="light">
+    <html suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

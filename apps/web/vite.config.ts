@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react";
 import mdx from "fumadocs-mdx/vite";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
-import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   base: "/",
@@ -14,29 +13,28 @@ export default defineConfig({
   plugins: [
     mdx(await import("./source.config")),
     tailwindcss(),
-    tsConfigPaths({
-      projects: ["./tsconfig.json"],
-    }),
     tanstackStart({
-      spa: {
+      prerender: {
         enabled: true,
-        prerender: {
-          enabled: true,
-          crawlLinks: true,
-        },
+        crawlLinks: true,
       },
       pages: [
-        { path: "/" },
-        { path: "/releases" },
-        { path: "/editor" },
-        { path: "/docs" },
-        { path: "/api/search" },
-        { path: "llms-full.txt" },
-        { path: "llms.txt" },
+        {
+          path: "/api/search",
+        },
+        {
+          path: "/llms.txt",
+        },
+        {
+          path: "/llms-full.txt",
+        },
       ],
     }),
     react(),
     // please see https://tanstack.com/start/latest/docs/framework/react/guide/hosting#nitro for guides on hosting
     nitro(),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
 });
