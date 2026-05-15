@@ -13,7 +13,6 @@ import { MonocleLayout } from "./layouts/monocle-layout";
 import { OverviewLayout } from "./layouts/overview-layout";
 import { RightTileLayout } from "./layouts/right-tile-layout";
 import { ScrollerLayout } from "./layouts/scroller-layout";
-import { TgmixLayout } from "./layouts/tgmix-layout";
 import { TileLayout } from "./layouts/tile-layout";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -27,7 +26,6 @@ type LayoutId =
   | "center-tile"
   | "right-tile"
   | "monocle"
-  | "tgmix";
 
 type Orientation = "horizontal" | "vertical";
 
@@ -51,7 +49,6 @@ const OTHER_LAYOUTS: LayoutDef[] = [
   { id: "center-tile", label: "Center Tile", supportsOrientation: false },
   { id: "right-tile", label: "Right Tile", supportsOrientation: false },
   { id: "monocle", label: "Monocle", supportsOrientation: false },
-  { id: "tgmix", label: "Tgmix", supportsOrientation: false },
 ];
 
 const ALL_LAYOUTS = [...MAIN_LAYOUTS, ...OTHER_LAYOUTS];
@@ -230,7 +227,6 @@ export function MangoLayouts() {
         {activeLayout === "center-tile" && <CenterTileLayout orientation={orientation} />}
         {activeLayout === "right-tile" && <RightTileLayout />}
         {activeLayout === "monocle" && <MonocleLayout />}
-        {activeLayout === "tgmix" && <TgmixLayout />}
       </div>
 
       {/* Active layout label */}
