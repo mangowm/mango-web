@@ -25,12 +25,16 @@ export const Route = createFileRoute("/showcase")({
 function Lightbox({
   entries,
   index,
+  screenshotIndex,
+  setScreenshotIndex,
   onClose,
   onPrev,
   onNext,
 }: {
   entries: typeof showcaseEntries;
   index: number;
+  screenshotIndex: number;
+  setScreenshotIndex: (i: number) => void;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
@@ -38,9 +42,13 @@ function Lightbox({
   const entry = entries[index];
   const [imgError, setImgError] = useState(false);
 
+  const screenshots = entry.screenshots ?? [];
+  const currentScreenshot = screenshots[screenshotIndex] ?? screenshots[0];
+
   useEffect(() => {
     setImgError(false);
-  }, [index]);
+    setScreenshotIndex(0);
+  }, [index, setScreenshotIndex]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -114,7 +122,7 @@ function Lightbox({
         >
           {!imgError ? (
             <img
-              src={entry.screenshot}
+              src={currentScreenshot}
               alt={`${entry.username}'s desktop`}
               className="max-h-[80vh] max-w-[85vw] object-contain"
               onError={() => setImgError(true)}
@@ -125,6 +133,21 @@ function Lightbox({
             </div>
           )}
         </div>
+
+        {screenshots.length > 1 && (
+          <div className="flex items-center gap-1.5">
+            {screenshots.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setScreenshotIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-200 ${
+                  i === screenshotIndex ? "w-4 bg-white/70" : "w-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Screenshot ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
 
         <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs backdrop-blur-md">
           <span className="font-mono text-white/25 tracking-widest">
@@ -234,7 +257,7 @@ function ShowcaseCard({
       >
         {!imgError ? (
           <img
-            src={entry.screenshot}
+            src={entry.screenshots?.[0]}
             alt={`${entry.username}'s desktop`}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
@@ -437,6 +460,7 @@ function Showcase() {
   const entries = Route.useLoaderData();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [screenshotIndex, setScreenshotIndex] = useState(0);
 
   const allTags = useMemo(
     () =>
@@ -581,6 +605,8 @@ function Showcase() {
         <Lightbox
           entries={filteredEntries}
           index={lightboxIndex}
+          screenshotIndex={screenshotIndex}
+          setScreenshotIndex={setScreenshotIndex}
           onClose={closeLightbox}
           onPrev={prevLightbox}
           onNext={nextLightbox}

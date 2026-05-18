@@ -19,7 +19,7 @@ type RawEntry = {
 
 type ShowcaseEntry = {
   username: string;
-  screenshot: string;
+  screenshots: string[];
   dotfiles: string;
   tags: string[];
   added: string | null;
@@ -49,24 +49,40 @@ async function main() {
     const { username, dotfiles, tags = [], added = null } = item;
 
     const rawBase = toRawBase(dotfiles);
-    const screenshotUrl = `${rawBase}/screenshot.png`;
 
-    console.log(`Downloading screenshot for @${username} from ${screenshotUrl}...`);
+    console.log(`Fetching screenshots for @${username}...`);
 
-    const imgRes = await fetch(screenshotUrl);
-    if (!imgRes.ok) {
-      console.warn(`  ⚠ Skipping @${username}: screenshot.png not found (${imgRes.status})`);
+    const screenshotNames: string[] = [];
+
+    const rootProbe = await fetch(`${rawBase}/screenshot.png`, { method: "HEAD" });
+    if (rootProbe.ok) screenshotNames.push("screenshot.png");
+
+    for (let i = 1; i <= 10; i++) {
+      const probe = await fetch(`${rawBase}/screenshots/${i}.png`, { method: "HEAD" });
+      if (!probe.ok) break;
+      screenshotNames.push(`${i}.png`);
+    }
+
+    if (screenshotNames.length === 0) {
+      console.warn(`  ⚠ Skipping @${username}: no screenshots found`);
       continue;
     }
 
-    const buffer = Buffer.from(await imgRes.arrayBuffer());
-    const fileName = `${username}.png`;
-
-    await fs.writeFile(path.join(imagesDir, fileName), buffer);
+    const savedPaths: string[] = [];
+    for (const name of screenshotNames) {
+      const isRoot = name === "screenshot.png";
+      const url = isRoot ? `${rawBase}/screenshot.png` : `${rawBase}/screenshots/${name}`;
+      const imgRes = await fetch(url);
+      if (!imgRes.ok) continue;
+      const buffer = Buffer.from(await imgRes.arrayBuffer());
+      const fileName = `${username}-${name}`;
+      await fs.writeFile(path.join(imagesDir, fileName), buffer);
+      savedPaths.push(`/showcase/${fileName}`);
+    }
 
     entries.push({
       username,
-      screenshot: `/showcase/${fileName}`,
+      screenshots: savedPaths,
       dotfiles,
       tags,
       added,
