@@ -218,11 +218,11 @@ function Lightbox({
 
 function ShowcaseCard({
   entry,
-  _index,
+  index: _index,
   onOpen,
 }: {
   entry: (typeof showcaseEntries)[0];
-  _index: number;
+  index: number;
   onOpen: () => void;
 }) {
   const [imgError, setImgError] = useState(false);
@@ -310,6 +310,131 @@ function ShowcaseCard({
   );
 }
 
+const VISIBLE_TAGS = 8;
+
+function TagFilter({
+  allTags,
+  activeTags,
+  entries,
+  filteredCount,
+  onToggle,
+  onClear,
+}: {
+  allTags: string[];
+  activeTags: Set<string>;
+  entries: typeof showcaseEntries;
+  filteredCount: number;
+  onToggle: (tag: string) => void;
+  onClear: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  // Auto-expand if an active tag sits beyond the visible fold
+  useEffect(() => {
+    if (!expanded) {
+      const hasHiddenActive = allTags.slice(VISIBLE_TAGS).some((t) => activeTags.has(t));
+      if (hasHiddenActive) setExpanded(true);
+    }
+  }, [activeTags, allTags, expanded]);
+
+  const visible = expanded ? allTags : allTags.slice(0, VISIBLE_TAGS);
+  const hiddenCount = allTags.length - VISIBLE_TAGS;
+
+  return (
+    <div className="mt-5 space-y-2">
+      <div className="flex flex-wrap items-center gap-1.5">
+        {visible.map((tag) => {
+          const active = activeTags.has(tag);
+          const count = entries.filter((e) => e.tags?.includes(tag)).length;
+          return (
+            <button
+              key={tag}
+              onClick={() => onToggle(tag)}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-all duration-150 ${
+                active
+                  ? "border-fd-primary bg-fd-primary/10 text-fd-primary"
+                  : "border-fd-border/50 text-fd-muted-foreground hover:border-fd-border hover:text-fd-foreground"
+              }`}
+            >
+              {active && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              )}
+              {tag}
+              <span
+                className={`rounded-full px-1 py-px text-[9px] font-semibold tabular-nums ${
+                  active
+                    ? "bg-fd-primary/15 text-fd-primary"
+                    : "bg-fd-muted text-fd-muted-foreground/60"
+                }`}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
+
+        {!expanded && hiddenCount > 0 && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="inline-flex items-center gap-1 rounded-full border border-dashed border-fd-border/50 px-3 py-1 text-xs text-fd-muted-foreground transition-colors hover:border-fd-border hover:text-fd-foreground"
+          >
+            +{hiddenCount} more
+          </button>
+        )}
+
+        {expanded && allTags.length > VISIBLE_TAGS && (
+          <button
+            onClick={() => setExpanded(false)}
+            className="inline-flex items-center gap-1 rounded-full border border-dashed border-fd-border/50 px-3 py-1 text-xs text-fd-muted-foreground transition-colors hover:border-fd-border hover:text-fd-foreground"
+          >
+            Show less
+          </button>
+        )}
+      </div>
+
+      {activeTags.size > 0 && (
+        <div className="flex items-center gap-2 text-xs text-fd-muted-foreground">
+          <span>
+            {filteredCount} of {entries.length} setups
+          </span>
+          <span className="h-3 w-px bg-fd-border/60" />
+          <button
+            onClick={onClear}
+            className="inline-flex items-center gap-1 hover:text-fd-foreground transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+            Clear filters
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Showcase() {
   const entries = Route.useLoaderData();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -334,7 +459,11 @@ function Showcase() {
   const toggleTag = useCallback((tag: string) => {
     setActiveTags((prev) => {
       const next = new Set(prev);
-      if (next.has(tag)) next.delete(tag); else next.add(tag);
+      if (next.has(tag)) {
+        next.delete(tag);
+      } else {
+        next.add(tag);
+      }
       return next;
     });
   }, []);
@@ -395,79 +524,14 @@ function Showcase() {
 
             {/* Tag filters */}
             {allTags.length > 0 && (
-              <div className="mt-5 space-y-2">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {allTags.map((tag) => {
-                    const active = activeTags.has(tag);
-                    const count = entries.filter((e) => e.tags?.includes(tag)).length;
-                    return (
-                      <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-all duration-150 ${
-                          active
-                            ? "border-fd-primary bg-fd-primary/10 text-fd-primary"
-                            : "border-fd-border/50 text-fd-muted-foreground hover:border-fd-border hover:text-fd-foreground"
-                        }`}
-                      >
-                        {active && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="9"
-                            height="9"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M20 6 9 17l-5-5" />
-                          </svg>
-                        )}
-                        {tag}
-                        <span
-                          className={`rounded-full px-1 py-px text-[9px] font-semibold tabular-nums ${
-                            active
-                              ? "bg-fd-primary/15 text-fd-primary"
-                              : "bg-fd-muted text-fd-muted-foreground/60"
-                          }`}
-                        >
-                          {count}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {activeTags.size > 0 && (
-                  <div className="flex items-center gap-2 text-xs text-fd-muted-foreground">
-                    <span>
-                      {filteredEntries.length} of {entries.length} setups
-                    </span>
-                    <span className="h-3 w-px bg-fd-border/60" />
-                    <button
-                      onClick={() => setActiveTags(new Set())}
-                      className="inline-flex items-center gap-1 text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M18 6 6 18M6 6l12 12" />
-                      </svg>
-                      Clear filters
-                    </button>
-                  </div>
-                )}
-              </div>
+              <TagFilter
+                allTags={allTags}
+                activeTags={activeTags}
+                entries={entries}
+                filteredCount={filteredEntries.length}
+                onToggle={toggleTag}
+                onClear={() => setActiveTags(new Set())}
+              />
             )}
           </div>
 
